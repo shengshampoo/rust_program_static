@@ -7,7 +7,7 @@ RUN apk upgrade
 # required by qemu
 RUN apk add --no-cache \
     linux-headers musl-devel musl-devel-static \
-    git curl cmake gmake \
+    git curl cmake gmake aria2 \
     zlib-ng-compat-devel zlib-ng-compat-devel-static \
     openssl3-devel openssl3-devel-static \
     clang clang-devel clang-devel-static libunwind-devel libunwind-devel-static \
@@ -21,5 +21,5 @@ ENV RUSTFLAGS="-C target-feature=+crt-static -C linker=clang -C strip=symbols -C
 ENV CARGO_TARGET_X86_64_UNKNOWN_LINUX_MUSL_LINKER=clang
 ENV CARGO_TARGET_AARCH64_UNKNOWN_LINUX_MUSL_LINKER=clang
 
-RUN aria2c -x2 -R build-static-lib.sh && \
+RUN aria2c -x2 -R https://raw.githubusercontent.com/shengshampoo/rust_program_static/refs/heads/main/build-static-lib.sh && \
 chmod +x build-static-lib.sh && ./build-static-lib.sh
