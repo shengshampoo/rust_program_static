@@ -20,4 +20,10 @@ jobs:
     - name: build static program with chimera linux docker 
       run: |
         docker run --cidfile=builderust.cid builderust true
-        docker cp "$(cat builderust.cid):tmp/workspace2/." 
+        docker cp "$(cat builderust.cid):work/artifact/." .
+
+    - name: Upload static program
+      uses: actions/upload-artifact@v4
+      with:
+        name: builderust
+        path: ./*
