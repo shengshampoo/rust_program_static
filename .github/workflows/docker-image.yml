@@ -2,9 +2,9 @@ name: Docker Image CI - X86_64 for Chimera Linux
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "main" ]
 
 jobs:
 
