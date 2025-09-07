@@ -5,7 +5,7 @@ set -e
 
 WORKSPACE=/tmp/workspace
 mkdir -p $WORKSPACE
-mkdir /work/artifact
+mkdir -p /work/artifact
 
 HOST_OS=$(uname -s)
 HOST_ARCH=$(uname -m)
