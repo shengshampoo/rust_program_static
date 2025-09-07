@@ -4,7 +4,6 @@ FROM chimeralinux/chimera
 RUN apk update
 RUN apk upgrade
 
-# required by qemu
 RUN apk add --no-cache \
     linux-headers musl-devel musl-devel-static \
     git curl cmake gmake aria2 \
