@@ -16,7 +16,7 @@ cd $WORKSPACE
 git clone https://github.com/MiSawa/xq.git
 cd $pkgss
 RUSTFLAGS="-C target-feature=+crt-static -C linker=clang -C strip=symbols -C opt-level=s"
-CARGO_TARGET_X86_64_UNKNOWN_LINUX_MUSL_LINKER=clang
+CARGO_TARGET_${HOST_ARCH}_UNKNOWN_LINUX_MUSL_LINKER=clang
 cargo build --target ${HOST_ARCH}-chimera-linux-musl --release
 cd $WORKSPACE/$pkgss/target/${HOST_ARCH}-chimera-linux-musl/release/
 XZ_OPT=-e9 tar vcJf ./$pkgss.tar.xz $pkgss
@@ -26,11 +26,10 @@ mv ./$pkgss.tar.xz /work/artifact/
 pkgss=jless
 cd $WORKSPACE
 git clone https://github.com/PaulJuliusMartinez/jless.git
-cargo build --bin jless --target ${HOST_ARCH}-chimera-linux-musl --release
 cd $pkgss
-RUSTFLAGS="-C target-feature=+crt-static -C link-args=-L/usr/lib -lxcb -lXau -lXdmcp -C linker=clang"
-CARGO_TARGET_X86_64_UNKNOWN_LINUX_MUSL_LINKER=clang
-cargo build --target ${HOST_ARCH}-chimera-linux-musl --release
+RUSTFLAGS="-C target-feature=+crt-static -C link-args=-L/usr/lib -lxcb -lXau -lXdmcp -C linker=clang -C strip=symbols -C opt-level=s"
+CARGO_TARGET_${HOST_ARCH}_UNKNOWN_LINUX_MUSL_LINKER=clang
+cargo build --bin jless --target ${HOST_ARCH}-chimera-linux-musl --release
 cd $WORKSPACE/$pkgss/target/${HOST_ARCH}-chimera-linux-musl/release/
 XZ_OPT=-e9 tar vcJf ./$pkgss.tar.xz $pkgss
 mv ./$pkgss.tar.xz /work/artifact/
