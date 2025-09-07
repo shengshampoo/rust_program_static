@@ -29,3 +29,12 @@ cargo build --bin jless --target ${HOST_ARCH}-chimera-linux-musl --release
 cd $WORKSPACE/jless/target/${HOST_ARCH}-chimera-linux-musl/release/
 XZ_OPT=-e9 tar vcJf ./jless.tar.xz jless
 mv ./jless.tar.xz /work/artifact/
+
+# bandwhich
+git clone https://github.com/imsnif/bandwhich
+cd bandwhich
+RUSTFLAGS="-C target-feature=+crt-static -C linker=clang -C strip=symbols -C opt-level=s"
+cargo build --target ${HOST_ARCH}-chimera-linux-musl --release
+cd $WORKSPACE/bandwhich/target/${HOST_ARCH}-chimera-linux-musl/release/
+XZ_OPT=-e9 tar vcJf ./bandwhich.tar.xz bandwhich
+mv ./bandwhich.tar.xz /work/artifact/
