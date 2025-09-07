@@ -13,6 +13,10 @@ RUN apk add --no-cache \
     libatomic-chimera-devel libatomic-chimera-devel-static \
     libarchive-progs libgcc-chimera cargo rust rust-src rust-std
 
+# jless
+RUN apk add --no-cache \ 
+    libxcb-devel libxcb-devel-static libxau-devel libxau-devel-static libxdmcp-devel libxdmcp-devel-static
+
 RUN ln -s /usr/lib/libgcc_s.so.1 /usr/lib/libgcc_s.so
 RUN ln -s /usr/sbin/cc /usr/sbin/musl-gcc
 
