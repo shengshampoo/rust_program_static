@@ -1,6 +1,8 @@
 
 #! /bin/bash
-#build some static lib only for qemu 9.2
+
+set -e
+
 WORKSPACE=/tmp/workspace
 mkdir -p $WORKSPACE
 
