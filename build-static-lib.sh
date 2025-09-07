@@ -31,6 +31,7 @@ XZ_OPT=-e9 tar vcJf ./jless.tar.xz jless
 mv ./jless.tar.xz /work/artifact/
 
 # bandwhich
+cd $WORKSPACE
 git clone https://github.com/imsnif/bandwhich
 cd bandwhich
 RUSTFLAGS="-C target-feature=+crt-static -C linker=clang -C strip=symbols -C opt-level=s"
