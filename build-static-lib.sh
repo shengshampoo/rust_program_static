@@ -19,6 +19,6 @@ RUSTFLAGS="-C target-feature=+crt-static -C linker=clang -C strip=symbols -C opt
 CARGO_TARGET_X86_64_UNKNOWN_LINUX_MUSL_LINKER=clang 
 cargo build --target ${HOST_ARCH}-chimera-linux-musl --release
 cd $WORKSPACE/$pkgss/target/${HOST_ARCH}-chimera-linux-musl/release/
-tar -Jvcf -I 'xz -9 -T0' ./$pkgss.tar.xz $pkgss
+tar -I 'xz -9' -vcf ./$pkgss.tar.xz $pkgss
 mv ./$pkgss.tar.xz /work/artifact/
 
