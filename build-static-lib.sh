@@ -29,7 +29,7 @@ git clone https://github.com/PaulJuliusMartinez/jless.git
 cd $pkgss
 RUSTFLAGS="-C target-feature=+crt-static -C link-args=-L/usr/lib -lxcb -lXau -lXdmcp -C linker=clang -C strip=symbols -C opt-level=s"
 CARGO_TARGET_${HOST_ARCH}_UNKNOWN_LINUX_MUSL_LINKER=clang
-cargo build --bin jless --target ${HOST_ARCH}-chimera-linux-musl --release
+cargo build --bin $pkgss --target ${HOST_ARCH}-chimera-linux-musl --release
 cd $WORKSPACE/$pkgss/target/${HOST_ARCH}-chimera-linux-musl/release/
 XZ_OPT=-e9 tar vcJf ./$pkgss.tar.xz $pkgss
 mv ./$pkgss.tar.xz /work/artifact/
