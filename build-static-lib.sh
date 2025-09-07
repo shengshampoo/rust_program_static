@@ -6,11 +6,8 @@ set -e
 WORKSPACE=/tmp/workspace
 mkdir -p $WORKSPACE
 
-HOST_OS_RAW=$(uname -s)
-HOST_ARCH_RAW=$(uname -m)
-
-HOST_OS=${HOST_OS_RAW,,}
-HOST_ARCH=${HOST_ARCH_RAW,,}
+HOST_OS=$(uname -s)
+HOST_ARCH=$(uname -m)
 
 # xq
 cd $WORKSPACE
