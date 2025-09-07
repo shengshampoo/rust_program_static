@@ -17,5 +17,9 @@ RUN apk add --no-cache \
 RUN ln -s /usr/lib/libgcc_s.so.1 /usr/lib/libgcc_s.so
 RUN ln -s /usr/sbin/cc /usr/sbin/musl-gcc
 
+ENV RUSTFLAGS="-C target-feature=+crt-static -C linker=clang -C strip=symbols -C opt-level=s" 
+ENV CARGO_TARGET_X86_64_UNKNOWN_LINUX_MUSL_LINKER=clang
+ENV CARGO_TARGET_AARCH64_UNKNOWN_LINUX_MUSL_LINKER=clang
+
 RUN aria2c -x2 -R build-static-lib.sh && \
 chmod +x build-static-lib.sh && ./build-static-lib.sh
