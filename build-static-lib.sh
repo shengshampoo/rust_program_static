@@ -26,7 +26,7 @@ mv ./$pkgss.tar.xz /work/artifact/
 pkgss=jless
 cd $WORKSPACE
 git clone https://github.com/PaulJuliusMartinez/jless.git
-cargo zigbuild --bin jless --target x86_64-chimera-linux-musl --release
+cargo build --bin jless --target ${HOST_ARCH}-chimera-linux-musl --release
 cd $pkgss
 RUSTFLAGS="-C target-feature=+crt-static -C link-args=-L/usr/lib -lxcb -lXau -lXdmcp -C linker=clang"
 CARGO_TARGET_X86_64_UNKNOWN_LINUX_MUSL_LINKER=clang
