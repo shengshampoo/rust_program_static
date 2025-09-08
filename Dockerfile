@@ -14,8 +14,12 @@ RUN apk add --no-cache \
     libarchive-progs libgcc-chimera cargo rust rust-src rust-std
 
 # jless and amp
-RUN apk add --no-cache \ 
+RUN apk add --no-cache \
     libxcb-devel libxcb-devel-static libxau-devel libxau-devel-static libxdmcp-devel libxdmcp-devel-static python-devel
+
+# pngquant
+RUN apk add --no-cache \
+    lcms2-devel lcms2-devel-static libpng-devel libpng-devel-static
 
 RUN ln -s /usr/lib/libgcc_s.so.1 /usr/lib/libgcc_s.so
 RUN ln -s /usr/sbin/cc /usr/sbin/musl-gcc
