@@ -27,6 +27,7 @@ RUN ln -s /usr/sbin/cc /usr/sbin/musl-gcc
 ENV RUSTFLAGS="-C target-feature=+crt-static -C linker=clang -C strip=symbols -C opt-level=s" 
 ENV CARGO_TARGET_X86_64_UNKNOWN_LINUX_MUSL_LINKER=clang
 ENV CARGO_TARGET_AARCH64_UNKNOWN_LINUX_MUSL_LINKER=clang
+ENV XZ_OPT=-e9
 ENV LCMS2_STATIC=1
 ENV OPENSSL_DIR=/usr 
 ENV OPENSSL_LIB_DIR=/usr/lib 
