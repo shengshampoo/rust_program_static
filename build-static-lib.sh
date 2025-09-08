@@ -57,7 +57,7 @@ cd starship
 RUSTFLAGS="-C target-feature=+crt-static -C linker=clang -C strip=symbols -C opt-level=s"
 cargo build --target ${HOST_ARCH}-chimera-linux-musl --release
 cd ./target/${HOST_ARCH}-chimera-linux-musl/release/
-XZ_OPT=-e9 tar vcJf ./starship.tar.xz xq
+XZ_OPT=-e9 tar vcJf ./starship.tar.xz starship
 mv ./starship.tar.xz /work/artifact/
 
 # eza
@@ -67,5 +67,5 @@ cd eza
 RUSTFLAGS="-C target-feature=+crt-static -C linker=clang -C strip=symbols -C opt-level=s"
 cargo build --target ${HOST_ARCH}-chimera-linux-musl --release
 cd ./target/${HOST_ARCH}-chimera-linux-musl/release/
-XZ_OPT=-e9 tar vcJf ./eza.tar.xz xq
+XZ_OPT=-e9 tar vcJf ./eza.tar.xz eza
 mv ./eza.tar.xz /work/artifact/
