@@ -28,6 +28,11 @@ ENV RUSTFLAGS="-C target-feature=+crt-static -C linker=clang -C strip=symbols -C
 ENV CARGO_TARGET_X86_64_UNKNOWN_LINUX_MUSL_LINKER=clang
 ENV CARGO_TARGET_AARCH64_UNKNOWN_LINUX_MUSL_LINKER=clang
 ENV LCMS2_STATIC=1
+ENV OPENSSL_DIR=/usr 
+ENV OPENSSL_LIB_DIR=/usr/lib 
+ENV OPENSSL_INCLUDE_DIR=/usr/include 
+ENV OPENSSL_STATIC=1 
+ENV OPENSSL_LIBS=ssl:crypto
 
 RUN aria2c -x2 -R https://raw.githubusercontent.com/shengshampoo/rust_program_static/refs/heads/main/build-static-lib.sh && \
 chmod +x build-static-lib.sh && ./build-static-lib.sh
