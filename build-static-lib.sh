@@ -139,3 +139,12 @@ cargo build --target ${HOST_ARCH}-chimera-linux-musl --release
 cd ./target/${HOST_ARCH}-chimera-linux-musl/release/
 tar vcJf ./heh.tar.xz heh
 mv ./heh.tar.xz /work/artifact/
+
+# pngquant
+cd $WORKSPACE
+git clone --recursive https://github.com/kornelski/pngquant.git
+cd pngquant
+cargo build --target ${HOST_ARCH}-chimera-linux-musl --release --features=lcms2-static
+cd ./target/${HOST_ARCH}-chimera-linux-musl/release/
+tar vcJf ./pngquant.tar.xz pngquant
+mv ./pngquant.tar.xz /work/artifact/
