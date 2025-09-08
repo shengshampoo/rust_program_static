@@ -89,3 +89,53 @@ cargo build --target ${HOST_ARCH}-chimera-linux-musl --release --features 'pcre2
 cd ./target/${HOST_ARCH}-chimera-linux-musl/release/
 tar vcJf ./rg.tar.xz rg
 mv ./rg.tar.xz /work/artifact/
+
+# lsd
+cd $WORKSPACE
+git clone https://github.com/lsd-rs/lsd.git
+cd lsd
+RUSTFLAGS="-C target-feature=+crt-static -C linker=clang -C strip=symbols -C opt-level=s"
+cargo build --target ${HOST_ARCH}-chimera-linux-musl --release
+cd ./target/${HOST_ARCH}-chimera-linux-musl/release/
+tar vcJf ./lsd.tar.xz lsd
+mv ./lsd.tar.xz /work/artifact/
+
+# hexyl
+cd $WORKSPACE
+git clone https://github.com/sharkdp/hexyl.git
+cd hexyl
+RUSTFLAGS="-C target-feature=+crt-static -C linker=clang -C strip=symbols -C opt-level=s"
+cargo build --target ${HOST_ARCH}-chimera-linux-musl --release
+cd ./target/${HOST_ARCH}-chimera-linux-musl/release/
+tar vcJf ./hexyl.tar.xz hexyl
+mv ./hexyl.tar.xz /work/artifact/
+
+# rust-parallel
+cd $WORKSPACE
+git clone https://github.com/aaronriekenberg/rust-parallel.git
+cd rust-parallel
+RUSTFLAGS="-C target-feature=+crt-static -C linker=clang -C strip=symbols -C opt-level=s"
+cargo build --target ${HOST_ARCH}-chimera-linux-musl --release
+cd ./target/${HOST_ARCH}-chimera-linux-musl/release/
+tar vcJf ./rust-parallel.tar.xz rust-parallel
+mv ./rust-parallel.tar.xz /work/artifact/
+
+# fd 
+cd $WORKSPACE
+git clone https://github.com/sharkdp/fd
+cd fd
+RUSTFLAGS="-C target-feature=+crt-static -C linker=clang -C strip=symbols -C opt-level=s"
+cargo build --target ${HOST_ARCH}-chimera-linux-musl --release
+cd ./target/${HOST_ARCH}-chimera-linux-musl/release/
+tar vcJf ./fd.tar.xz fd
+mv ./fd.tar.xz /work/artifact/
+
+# heh
+cd $WORKSPACE
+git clone https://github.com/ndd7xv/heh
+cd heh
+RUSTFLAGS="-C target-feature=+crt-static -C linker=clang -C strip=symbols -C opt-level=s"
+cargo build --target ${HOST_ARCH}-chimera-linux-musl --release
+cd ./target/${HOST_ARCH}-chimera-linux-musl/release/
+tar vcJf ./heh.tar.xz heh
+mv ./heh.tar.xz /work/artifact/
