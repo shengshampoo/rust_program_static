@@ -14,11 +14,11 @@ HOST_ARCH=$(uname -m)
 pkgs="bandwhich"
 cd $WORKSPACE
 git clone https://github.com/imsnif/bandwhich.git
-cd ${pkgs}
+cd "${pkgs}"
 RUSTFLAGS="-C target-feature=+crt-static -C linker=clang -C strip=symbols -C opt-level=s"
 cargo build --target ${HOST_ARCH}-chimera-linux-musl --release
 cd ./target/${HOST_ARCH}-chimera-linux-musl/release/
-XZ_OPT=-e9 tar vcJf ./${pkgs}.tar.xz -C /work/artifact/ ${pkgs}
+tar vcJf ./${pkgs}.tar.xz -C /work/artifact/ ${pkgs}
 
 # xq
 pkgs="xq"
@@ -28,7 +28,7 @@ cd ${pkgs}
 RUSTFLAGS="-C target-feature=+crt-static -C linker=clang -C strip=symbols -C opt-level=s"
 cargo build --target ${HOST_ARCH}-chimera-linux-musl --release
 cd ./target/${HOST_ARCH}-chimera-linux-musl/release/
-XZ_OPT=-e9 tar vcJf ./${pkgs}.tar.xz -C /work/artifact/ ${pkgs}
+XZ_OPT=-e9 tar vcJf ./"${pkgs}".tar.xz -C /work/artifact/ "${pkgs}"
 
 # jless
 pkgs="jless"
