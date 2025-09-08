@@ -65,7 +65,27 @@ cd $WORKSPACE
 git clone https://github.com/eza-community/eza.git
 cd eza
 RUSTFLAGS="-C target-feature=+crt-static -C linker=clang -C strip=symbols -C opt-level=s"
-cargo build --target ${HOST_ARCH}-chimera-linux-musl --release
+cargo build --bin coreutils --target ${HOST_ARCH}-chimera-linux-musl --release
 cd ./target/${HOST_ARCH}-chimera-linux-musl/release/
 tar vcJf ./eza.tar.xz eza
 mv ./eza.tar.xz /work/artifact/
+
+# coreutils
+cd $WORKSPACE
+git clone https://github.com/uutils/coreutils.git 
+cd coreutils
+RUSTFLAGS="-C target-feature=+crt-static -C linker=clang -C strip=symbols -C opt-level=s"
+cargo build --target ${HOST_ARCH}-chimera-linux-musl --release
+cd ./target/${HOST_ARCH}-chimera-linux-musl/release/
+tar vcJf ./coreutils.tar.xz coreutils
+mv ./coreutils.tar.xz /work/artifact/
+
+# rg
+cd $WORKSPACE
+git clone https://github.com/BurntSushi/ripgrep
+cd ripgrep
+RUSTFLAGS="-C target-feature=+crt-static -C linker=clang -C strip=symbols -C opt-level=s"
+cargo build --target ${HOST_ARCH}-chimera-linux-musl --release --features 'pcre2'
+cd ./target/${HOST_ARCH}-chimera-linux-musl/release/
+tar vcJf ./rg.tar.xz rg
+mv ./rg.tar.xz /work/artifact/
