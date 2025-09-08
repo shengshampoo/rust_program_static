@@ -167,7 +167,7 @@ cd boringtun
 RUSTFLAGS="-C target-feature=+crt-static -C linker=clang -C strip=symbols -C opt-level=s"
 cargo build --target ${HOST_ARCH}-chimera-linux-musl --release
 cd ./target/${HOST_ARCH}-chimera-linux-musl/release/
-tar vcJf ./boringtun.tar.xz boringtun
+tar vcJf ./boringtun.tar.xz boringtun-cli
 mv ./boringtun.tar.xz /work/artifact/
 
 # rosenpass
