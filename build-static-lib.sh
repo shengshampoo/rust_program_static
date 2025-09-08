@@ -17,7 +17,8 @@ cd bandwhich
 RUSTFLAGS="-C target-feature=+crt-static -C linker=clang -C strip=symbols -C opt-level=s"
 cargo build --target ${HOST_ARCH}-chimera-linux-musl --release
 cd ./target/${HOST_ARCH}-chimera-linux-musl/release/
-tar vcJf ./bandwhich.tar.xz -C /work/artifact/ bandwhich
+tar vcJf ./bandwhich.tar.xz bandwhich
+mv ./bandwhich.tar.xz /work/artifact/
 
 # xq
 cd $WORKSPACE
@@ -26,16 +27,18 @@ cd xq
 RUSTFLAGS="-C target-feature=+crt-static -C linker=clang -C strip=symbols -C opt-level=s"
 cargo build --target ${HOST_ARCH}-chimera-linux-musl --release
 cd ./target/${HOST_ARCH}-chimera-linux-musl/release/
-tar vcJf ./xq.tar.xz -C /work/artifact/ xq
+tar vcJf ./xq.tar.xz xq
+mv ./xq.tar.xz /work/artifact/
 
 # jless
 cd $WORKSPACE
 git clone https://github.com/PaulJuliusMartinez/jless.git
-cd ${pkgs}
+cd jless
 RUSTFLAGS="-C target-feature=+crt-static -C link-args=-L/usr/lib -lxcb -lXau -lXdmcp -C linker=clang -C strip=symbols -C opt-level=s"
 cargo build --bin jless --target ${HOST_ARCH}-chimera-linux-musl --release
 cd ./target/${HOST_ARCH}-chimera-linux-musl/release/
-tar vcJf ./jless.tar.xz -C /work/artifact/ jless
+tar vcJf ./jless.tar.xz jless
+mv ./jless.tar.xz /work/artifact/
 
 # amp
 cd $WORKSPACE
@@ -44,7 +47,8 @@ cd amp
 RUSTFLAGS="-C target-feature=+crt-static -C link-args=-L/usr/lib -lxcb -lXau -lXdmcp -C linker=clang -C strip=symbols -C opt-level=s"
 cargo build --target ${HOST_ARCH}-chimera-linux-musl --release
 cd ./target/${HOST_ARCH}-chimera-linux-musl/release/
-tar vcJf ./amp.tar.xz -C /work/artifact/ amp
+tar vcJf ./amp.tar.xz amp
+mv ./amp.tar.xz /work/artifact/
 
 # starship
 cd $WORKSPACE
@@ -53,7 +57,8 @@ cd starship
 RUSTFLAGS="-C target-feature=+crt-static -C linker=clang -C strip=symbols -C opt-level=s"
 cargo build --target ${HOST_ARCH}-chimera-linux-musl --release
 cd ./target/${HOST_ARCH}-chimera-linux-musl/release/
-tar vcJf ./starship.tar.xz -C /work/artifact/ starship
+tar vcJf ./starship.tar.xz starship
+mv ./starship.tar.xz /work/artifact/
 
 # eza
 cd $WORKSPACE
@@ -62,4 +67,5 @@ cd eza
 RUSTFLAGS="-C target-feature=+crt-static -C linker=clang -C strip=symbols -C opt-level=s"
 cargo build --target ${HOST_ARCH}-chimera-linux-musl --release
 cd ./target/${HOST_ARCH}-chimera-linux-musl/release/
-tar vcJf ./eza.tar.xz -C /work/artifact/ eza
+tar vcJf ./eza.tar.xz eza
+mv ./eza.tar.xz /work/artifact/
