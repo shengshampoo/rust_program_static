@@ -144,7 +144,18 @@ mv ./heh.tar.xz /work/artifact/
 cd $WORKSPACE
 git clone --recursive https://github.com/kornelski/pngquant.git
 cd pngquant
+RUSTFLAGS="-C target-feature=+crt-static -C linker=clang -C strip=symbols -C opt-level=s"
 cargo build --target ${HOST_ARCH}-chimera-linux-musl --release --features=lcms2-static
 cd ./target/${HOST_ARCH}-chimera-linux-musl/release/
 tar vcJf ./pngquant.tar.xz pngquant
 mv ./pngquant.tar.xz /work/artifact/
+
+# gitoxide gix and ein
+cd $WORKSPACE
+git clone https://github.com/Byron/gitoxide.git
+cd gitoxide
+RUSTFLAGS="-C target-feature=+crt-static -C link-args=-L/usr/lib -lcrypto -lssl -lz -lm -lc -C linker=clang -C strip=symbols -C opt-level=s"
+cargo build --target ${HOST_ARCH}-chimera-linux-musl --release
+cd ./target/${HOST_ARCH}-chimera-linux-musl/release/
+tar vcJf ./gix.tar.xz gix ein
+mv ./gix.tar.xz /work/artifact/
