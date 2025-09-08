@@ -159,3 +159,23 @@ cargo build --target ${HOST_ARCH}-chimera-linux-musl --release
 cd ./target/${HOST_ARCH}-chimera-linux-musl/release/
 tar vcJf ./gix.tar.xz gix ein
 mv ./gix.tar.xz /work/artifact/
+
+# boringtun
+cd $WORKSPACE
+git clone https://github.com/cloudflare/boringtun
+cd boringtun
+RUSTFLAGS="-C target-feature=+crt-static -C linker=clang -C strip=symbols -C opt-level=s"
+cargo build --target ${HOST_ARCH}-chimera-linux-musl --release
+cd ./target/${HOST_ARCH}-chimera-linux-musl/release/
+tar vcJf ./boringtun.tar.xz boringtun
+mv ./boringtun.tar.xz /work/artifact/
+
+# rosenpass
+cd $WORKSPACE
+git clone https://github.com/rosenpass/rosenpass
+cd rosenpass
+RUSTFLAGS="-C target-feature=+crt-static -C linker=clang -C strip=symbols -C opt-level=s"
+cargo build --target ${HOST_ARCH}-chimera-linux-musl --release
+cd ./target/${HOST_ARCH}-chimera-linux-musl/release/
+tar vcJf ./rosenpass.tar.xz rosenpass rp
+mv ./rosenpass.tar.xz /work/artifact/
