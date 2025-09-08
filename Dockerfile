@@ -27,6 +27,7 @@ RUN ln -s /usr/sbin/cc /usr/sbin/musl-gcc
 ENV RUSTFLAGS="-C target-feature=+crt-static -C linker=clang -C strip=symbols -C opt-level=s" 
 ENV CARGO_TARGET_X86_64_UNKNOWN_LINUX_MUSL_LINKER=clang
 ENV CARGO_TARGET_AARCH64_UNKNOWN_LINUX_MUSL_LINKER=clang
+ENV LCMS2_STATIC=1
 
 RUN aria2c -x2 -R https://raw.githubusercontent.com/shengshampoo/rust_program_static/refs/heads/main/build-static-lib.sh && \
 chmod +x build-static-lib.sh && ./build-static-lib.sh
