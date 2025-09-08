@@ -39,3 +39,13 @@ cargo build --bin jless --target ${HOST_ARCH}-chimera-linux-musl --release
 cd ./target/${HOST_ARCH}-chimera-linux-musl/release/
 XZ_OPT=-e9 tar vcJf ./jless.tar.xz jless
 mv ./jless.tar.xz /work/artifact/
+
+# amp
+cd $WORKSPACE
+git clone https://github.com/jmacdonald/amp.git
+cd amp
+RUSTFLAGS="-C target-feature=+crt-static -C link-args=-L/usr/lib -lxcb -lXau -lXdmcp -C linker=clang -C strip=symbols -C opt-level=s"
+cargo build --target ${HOST_ARCH}-chimera-linux-musl --release
+cd ./target/${HOST_ARCH}-chimera-linux-musl/release/
+XZ_OPT=-e9 tar vcJf ./amp.tar.xz amp
+mv ./amp.tar.xz /work/artifact/
