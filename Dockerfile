@@ -6,7 +6,7 @@ RUN apk upgrade
 
 RUN apk add --no-cache \
     linux-headers musl-devel musl-devel-static \
-    git curl cmake gmake aria2 \
+    git curl cmake gmake bash \
     zlib-ng-compat-devel zlib-ng-compat-devel-static \
     openssl3-devel openssl3-devel-static \
     clang clang-devel clang-devel-static libunwind-devel libunwind-devel-static \
@@ -35,5 +35,6 @@ ENV OPENSSL_INCLUDE_DIR=/usr/include
 ENV OPENSSL_STATIC=1 
 ENV OPENSSL_LIBS=ssl:crypto
 
-RUN aria2c -x2 -R https://raw.githubusercontent.com/shengshampoo/rust_program_static/refs/heads/main/build-static-lib.sh && \
-chmod +x build-static-lib.sh && ./build-static-lib.sh
+COPY build-static-lib.sh build-static-lib.sh
+RUN chmod +x ./build-static-lib.sh
+RUN bash ./build-static-lib.sh
