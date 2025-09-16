@@ -1,4 +1,4 @@
-name: Docker Image CI - X86_64 for Chimera Linux
+name: Docker Image CI - X86_64/AARCH64 for Chimera Linux
 
 on:
   push:
@@ -7,10 +7,11 @@ on:
     branches: [ "main" ]
 
 jobs:
-
   build:
-
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, ubuntu-24.04-arm]
+    runs-on: ${{ matrix.os }}
 
     steps:
     - uses: actions/checkout@v4
@@ -22,8 +23,88 @@ jobs:
         docker run --cidfile=builderust.cid builderust true
         docker cp "$(cat builderust.cid):work/artifact/." .
 
-    - name: Upload static program
+    - name: Upload static program - bandwhich
       uses: actions/upload-artifact@v4
       with:
-        name: builderust
-        path: ./*.tar.xz
+        name: bandwhich-${{ matrix.os }}
+        path: ./bandwhich.tar.xz
+    - name: Upload static program - xq
+      uses: actions/upload-artifact@v4
+      with:
+        name: xq-${{ matrix.os }}
+        path: ./xq.tar.xz
+    - name: Upload static program - jless
+      uses: actions/upload-artifact@v4
+      with:
+        name: jless-${{ matrix.os }}
+        path: ./jless.tar.xz
+    - name: Upload static program - amp
+      uses: actions/upload-artifact@v4
+      with:
+        name: amp-${{ matrix.os }}
+        path: ./amp.tar.xz
+    - name: Upload static program - starship
+      uses: actions/upload-artifact@v4
+      with:
+        name: starship-${{ matrix.os }}
+        path: ./starship.tar.xz
+    - name: Upload static program - eza
+      uses: actions/upload-artifact@v4
+      with:
+        name: eza-${{ matrix.os }}
+        path: ./eza.tar.xz
+    - name: Upload static program - coreutils
+      uses: actions/upload-artifact@v4
+      with:
+        name: coreutils-${{ matrix.os }}
+        path: ./coreutils.tar.xz
+    - name: Upload static program - rg
+      uses: actions/upload-artifact@v4
+      with:
+        name: rg-${{ matrix.os }}
+        path: ./rg.tar.xz       
+    - name: Upload static program - lsd
+      uses: actions/upload-artifact@v4
+      with:
+        name: lsd-${{ matrix.os }}
+        path: ./lsd.tar.xz
+    - name: Upload static program - hexyl
+      uses: actions/upload-artifact@v4
+      with:
+        name: hexyl-${{ matrix.os }}
+        path: ./hexyl.tar.xz        
+    - name: Upload static program - rust-parallel
+      uses: actions/upload-artifact@v4
+      with:
+        name: rust-parallel-${{ matrix.os }}        
+        path: ./rust-parallel.tar.xz
+    - name: Upload static program - fd
+      uses: actions/upload-artifact@v4
+      with:
+        name: fd-${{ matrix.os }}        
+        path: ./fd.tar.xz
+    - name: Upload static program - heh
+      uses: actions/upload-artifact@v4
+      with:
+        name: heh-${{ matrix.os }}        
+        path: ./heh.tar.xz
+    - name: Upload static program - pngquant
+      uses: actions/upload-artifact@v4
+      with:
+        name: pngquant-${{ matrix.os }}        
+        path: ./pngquant.tar.xz
+    - name: Upload static program - gix and ein
+      uses: actions/upload-artifact@v4
+      with:
+        name: gix-${{ matrix.os }}        
+        path: ./gix.tar.xz  
+    - name: Upload static program - boringtun
+      uses: actions/upload-artifact@v4
+      with:
+        name: boringtun-${{ matrix.os }}        
+        path: ./boringtun.tar.xz
+    - name: Upload static program - rosenpass
+      uses: actions/upload-artifact@v4
+      with:
+        name: rosenpass-${{ matrix.os }}        
+        path: ./rosenpass.tar.xz        
