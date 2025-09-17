@@ -107,4 +107,9 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: rosenpass-${{ matrix.os }}        
-        path: ./rosenpass.tar.xz        
+        path: ./rosenpass.tar.xz
+    - name: Upload static program - all
+      uses: actions/upload-artifact@v4
+      with:
+        name: 0_all_builderust-${{ matrix.os }}        
+        path: ./*.tar.xz
