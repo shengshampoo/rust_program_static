@@ -105,6 +105,11 @@ jobs:
       with:
         name: boringtun-${{ matrix.os }}        
         path: ./boringtun.tar.xz
+    - name: Upload static program - gotatun
+      uses: actions/upload-artifact@v4
+      with:
+        name: gotatun-${{ matrix.os }}        
+        path: ./gotatun.tar.xz    
     - name: Upload static program - rosenpass
       uses: actions/upload-artifact@v4
       with:
