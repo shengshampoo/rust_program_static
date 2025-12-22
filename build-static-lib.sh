@@ -170,6 +170,16 @@ cd ./target/${HOST_ARCH}-chimera-linux-musl/release/
 tar vcJf ./boringtun.tar.xz boringtun-cli
 mv ./boringtun.tar.xz /work/artifact/
 
+# gotaTun
+cd $WORKSPACE
+git clone https://github.com/mullvad/gotatun
+cd gotaTun
+RUSTFLAGS="-C target-feature=+crt-static -C linker=clang -C strip=symbols -C opt-level=s"
+cargo build --bin gotatun --target ${HOST_ARCH}-chimera-linux-musl --release
+cd ./target/${HOST_ARCH}-chimera-linux-musl/release/
+tar vcJf ./gotatun.tar.xz gotatun
+mv ./gotatun.tar.xz /work/artifact/
+
 # rosenpass
 cd $WORKSPACE
 git clone https://github.com/rosenpass/rosenpass
