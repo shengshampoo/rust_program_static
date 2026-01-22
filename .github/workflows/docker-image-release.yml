@@ -1,0 +1,194 @@
+name: Docker Image CI - X86_64/AARCH64 for Chimera Linux to continuous tags
+
+
+on:
+  push:
+    branches: [ "main" ]
+    tags:
+      - 'continuous'
+  pull_request:
+    branches: [ "main" ]
+  # run it manually
+  workflow_dispatch:    
+  schedule:
+    - cron: "36 8 * * *"  
+    - cron: "25 20 * * *" 
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, ubuntu-24.04-arm]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build the Docker image
+      run: docker build --tag builderust .
+
+    - name: build static program with chimera linux docker 
+      run: |
+        docker run --cidfile=builderust.cid builderust true
+        docker cp "$(cat builderust.cid):work/artifact/." .
+
+    - name: Upload binaries to release - bandwhich
+      uses: svenstaro/upload-release-action@v2
+      with:
+        file: ./bandwhich.tar.xz
+        asset_name: bandwhich-${{ runner.os }}-${{ runner.arch }}.tar.xz
+        tag: refs/tags/continuous
+        overwrite: true
+        body: "Fully static rust binary using alpine linux docker containers."
+
+    - name: Upload binaries to release - xq
+      uses: svenstaro/upload-release-action@v2
+      with:
+        file: ./xq.tar.xz
+        asset_name: xq-${{ runner.os }}-${{ runner.arch }}.tar.xz
+        tag: refs/tags/continuous
+        overwrite: true
+        body: "Fully static rust binary using alpine linux docker containers."
+
+    - name: Upload binaries to release - jless
+      uses: svenstaro/upload-release-action@v2
+      with:
+        file: ./jless.tar.xz
+        asset_name: jless-${{ runner.os }}-${{ runner.arch }}.tar.xz
+        tag: refs/tags/continuous
+        overwrite: true
+        body: "Fully static rust binary using alpine linux docker containers."
+
+    - name: Upload binaries to release - amp
+      uses: svenstaro/upload-release-action@v2
+      with:
+        file: ./amp.tar.xz
+        asset_name: amp-${{ runner.os }}-${{ runner.arch }}.tar.xz
+        tag: refs/tags/continuous
+        overwrite: true
+        body: "Fully static rust binary using alpine linux docker containers."
+
+    - name: Upload binaries to release - starship
+      uses: svenstaro/upload-release-action@v2
+      with:
+        file: ./starship.tar.xz
+        asset_name: starship-${{ runner.os }}-${{ runner.arch }}.tar.xz
+        tag: refs/tags/continuous
+        overwrite: true
+        body: "Fully static rust binary using alpine linux docker containers."
+
+    - name: Upload binaries to release - eza
+      uses: svenstaro/upload-release-action@v2
+      with:
+        file: ./eza.tar.xz
+        asset_name: eza-${{ runner.os }}-${{ runner.arch }}.tar.xz
+        tag: refs/tags/continuous
+        overwrite: true
+        body: "Fully static rust binary using alpine linux docker containers."
+
+    - name: Upload binaries to release - coreutils
+      uses: svenstaro/upload-release-action@v2
+      with:
+        file: ./coreutils.tar.xz
+        asset_name: coreutils-${{ runner.os }}-${{ runner.arch }}.tar.xz
+        tag: refs/tags/continuous
+        overwrite: true
+        body: "Fully static rust binary using alpine linux docker containers."
+
+    - name: Upload binaries to release - ripgrep
+      uses: svenstaro/upload-release-action@v2
+      with:
+        file: ./rg.tar.xz
+        asset_name: rg-${{ runner.os }}-${{ runner.arch }}.tar.xz
+        tag: refs/tags/continuous
+        overwrite: true
+        body: "Fully static rust binary using alpine linux docker containers."
+
+    - name: Upload binaries to release - lsd
+      uses: svenstaro/upload-release-action@v2
+      with:
+        file: ./lsd.tar.xz
+        asset_name: lsd-${{ runner.os }}-${{ runner.arch }}.tar.xz
+        tag: refs/tags/continuous
+        overwrite: true
+        body: "Fully static rust binary using alpine linux docker containers."
+
+    - name: Upload binaries to release - hexyl
+      uses: svenstaro/upload-release-action@v2
+      with:
+        file: ./hexyl.tar.xz
+        asset_name: hexyl-${{ runner.os }}-${{ runner.arch }}.tar.xz
+        tag: refs/tags/continuous
+        overwrite: true
+        body: "Fully static rust binary using alpine linux docker containers."
+
+    - name: Upload binaries to release - rust-parallel
+      uses: svenstaro/upload-release-action@v2
+      with:
+        file: ./rust-parallel.tar.xz
+        asset_name: rust-parallel-${{ runner.os }}-${{ runner.arch }}.tar.xz
+        tag: refs/tags/continuous
+        overwrite: true
+        body: "Fully static rust binary using alpine linux docker containers."
+
+    - name: Upload binaries to release - fd
+      uses: svenstaro/upload-release-action@v2
+      with:
+        file: ./fd.tar.xz
+        asset_name: fd-${{ runner.os }}-${{ runner.arch }}.tar.xz
+        tag: refs/tags/continuous
+        overwrite: true
+        body: "Fully static rust binary using alpine linux docker containers."
+
+    - name: Upload binaries to release - heh
+      uses: svenstaro/upload-release-action@v2
+      with:
+        file: ./heh.tar.xz
+        asset_name: heh-${{ runner.os }}-${{ runner.arch }}.tar.xz
+        tag: refs/tags/continuous
+        overwrite: true
+        body: "Fully static rust binary using alpine linux docker containers."
+
+    - name: Upload binaries to release - pngquant
+      uses: svenstaro/upload-release-action@v2
+      with:
+        file: ./pngquant.tar.xz
+        asset_name: pngquant-${{ runner.os }}-${{ runner.arch }}.tar.xz
+        tag: refs/tags/continuous
+        overwrite: true
+        body: "Fully static rust binary using alpine linux docker containers."
+
+    - name: Upload binaries to release - gix and ein
+      uses: svenstaro/upload-release-action@v2
+      with:
+        file: ./gix.tar.xz
+        asset_name: gix-${{ runner.os }}-${{ runner.arch }}.tar.xz
+        tag: refs/tags/continuous
+        overwrite: true
+        body: "Fully static rust binary using alpine linux docker containers."
+
+    - name: Upload binaries to release - boringtun
+      uses: svenstaro/upload-release-action@v2
+      with:
+        file: ./boringtun.tar.xz
+        asset_name: boringtun-${{ runner.os }}-${{ runner.arch }}.tar.xz
+        tag: refs/tags/continuous
+        overwrite: true
+        body: "Fully static rust binary using alpine linux docker containers."
+
+    - name: Upload binaries to release - gotatun
+      uses: svenstaro/upload-release-action@v2
+      with:
+        file: ./gotatun.tar.xz
+        asset_name: gotatun-${{ runner.os }}-${{ runner.arch }}.tar.xz
+        tag: refs/tags/continuous
+        overwrite: true
+        body: "Fully static rust binary using alpine linux docker containers."
+
+    - name: Upload binaries to release - rosenpass
+      uses: svenstaro/upload-release-action@v2
+      with:
+        file: ./rosenpass.tar.xz
+        asset_name: rosenpass-${{ runner.os }}-${{ runner.arch }}.tar.xz
+        tag: refs/tags/continuous
+        overwrite: true
+        body: "Fully static rust binary using alpine linux docker containers."
