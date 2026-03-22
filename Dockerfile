@@ -35,6 +35,6 @@ ENV OPENSSL_INCLUDE_DIR=/usr/include
 ENV OPENSSL_STATIC=1 
 ENV OPENSSL_LIBS=ssl:crypto
 
-COPY build-static-lib.sh build-static-lib.sh
-RUN chmod +x ./build-static-lib.sh
-RUN bash ./build-static-lib.sh
+COPY build-static-rust.sh build-static-rust.sh
+RUN chmod +x ./build-static-rust.sh
+RUN bash ./build-static-rust.sh
