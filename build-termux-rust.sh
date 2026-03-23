@@ -13,7 +13,7 @@ source $HOME/.cargo/env && rustup target add aarch64-linux-android
 
 # Android NDK
 NDKK=android-ndk-r29-linux
-curl -LO https://dl.google.com/android/repository/$NDKK-linux.zip && unzip $NDKK.zip
+curl -LO https://dl.google.com/android/repository/$NDKK.zip && unzip $NDKK.zip
 
 mv /usr/bin/cc /usr/bin/cc.old
 ln -sf /$NDKK/toolchains/llvm/prebuilt/$(uname -m)/bin/clang /usr/bin/cc
