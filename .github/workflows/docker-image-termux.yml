@@ -1,0 +1,40 @@
+name: Docker Image CI - Termux Android AARCH64 for Alpaquita Linux with rust
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  # run it manually
+  workflow_dispatch:    
+
+jobs:
+
+  build:
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        dockeros: [alpaquita_termux]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build the Docker image
+      run: docker build -f Dockerfile-${{ matrix.dockeros }} --tag builderust .
+
+    - name: build static program with alpine/alpaquita linux docker with golang 
+      run: |
+        docker run --cidfile=builderust.cid buildergo true
+        docker cp "$(cat builderust.cid):work/artifact/." .
+
+    - name: Upload static program - dufs
+      uses: actions/upload-artifact@v4
+      with:
+        name: dufs-${{ matrix.dockeros }}-${{ matrix.os }}
+        path: ./dufs.tar.xz 
+    - name: Upload static program - all
+      uses: actions/upload-artifact@v4
+      with:
+        name: 0_all_builderust-${{ matrix.os }}        
+        path: ./*.tar.xz
