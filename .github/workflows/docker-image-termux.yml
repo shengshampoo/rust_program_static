@@ -23,9 +23,9 @@ jobs:
     - name: Build the Docker image
       run: docker build -f Dockerfile-${{ matrix.dockeros }} --tag builderust .
 
-    - name: build static program with alpine/alpaquita linux docker with golang 
+    - name: build static program with alpine/alpaquita linux docker with rust 
       run: |
-        docker run --cidfile=builderust.cid buildergo true
+        docker run --cidfile=builderust.cid builderust true
         docker cp "$(cat builderust.cid):work/artifact/." .
 
     - name: Upload static program - dufs
