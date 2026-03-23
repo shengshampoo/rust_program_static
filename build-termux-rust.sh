@@ -11,24 +11,23 @@ mkdir -p /work/artifact
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --profile minimal --default-toolchain stable -y
 source $HOME/.cargo/env && rustup target add aarch64-linux-android
 
-# Android NDK
-NDKK=android-ndk-r29-linux
-curl -LO https://dl.google.com/android/repository/$NDKK.zip && unzip $NDKK.zip
+curl -LO https://dl.google.com/android/repository/android-ndk-r29-linux.zip && unzip android-ndk-r29-linux.zip
 
 mv /usr/bin/cc /usr/bin/cc.old
-ln -sf /$NDKK/toolchains/llvm/prebuilt/$(uname -m)/bin/clang /usr/bin/cc
+ln -sf /android-ndk-r29/toolchains/llvm/prebuilt/linux-x86_64/bin/clang /usr/bin/cc
 
-export CC="/$NDKK/toolchains/llvm/prebuilt/linux-$(uname -m)/bin/aarch64-linux-android23-clang"
-export PATH=/$NDKK/toolchains/llvm/prebuilt/linux-$(uname -m)/bin/:$PATH
-export ANDROID_NDK_HOME="/$NDKK"
-export ANDROID_NDK="/$NDKK"
-export ANDROID_NDK_ROOT="/$NDKK"
+export CC="/android-ndk-r29/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android23-clang"
+export PATH=/android-ndk-r29/toolchains/llvm/prebuilt/linux-x86_64/bin/:$PATH
+export ANDROID_NDK_HOME="/android-ndk-r29"
+export ANDROID_NDK="/android-ndk-r29"
+export ANDROID_NDK_ROOT="/android-ndk-r29"
+
 
 # dufs
 cd $WORKSPACE
 git clone https://github.com/sigoden/dufs
 cd dufs
-RUSTFLAGS="-C target-feature=+crt-static -C linker=/$NDKK/toolchains/llvm/prebuilt/linux-$(uname -m)/bin/aarch64-linux-android23-clang -C strip=symbols -C opt-level=s" cargo build --target aarch64-linux-android --release
+RUSTFLAGS="-C target-feature=+crt-static -C linker=/android-ndk-r29/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android23-clang -C strip=symbols -C opt-level=s" cargo build --target aarch64-linux-android --release
 cd ./target/aarch64-linux-android/release/
 tar vcJf ./dufs.tar.xz dufs
 mv ./dufs.tar.xz /work/artifact/
