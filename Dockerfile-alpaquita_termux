@@ -10,6 +10,6 @@ RUN apk add --no-cache \
   
 
 ENV XZ_OPT=-e9
-COPY build-termux-golang.sh build-termux-golang.sh
-RUN chmod +x ./build-termux-golang.sh
-RUN bash ./build-termux-golang.sh
+COPY build-termux-rust.sh build-termux-rust.sh
+RUN chmod +x ./build-termux-rust.sh
+RUN bash ./build-termux-rust.sh
