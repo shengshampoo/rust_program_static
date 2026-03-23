@@ -1,0 +1,15 @@
+FROM bellsoft/alpaquita-linux-base:stream-glibc
+
+RUN apk update
+RUN apk upgrade
+
+# required Rustup compile
+RUN apk add --no-cache \
+  git curl libstdc++ cmake bash make \
+  clang21 clang21-static clang21-dev llvm21
+  
+
+ENV XZ_OPT=-e9
+COPY build-termux-golang.sh build-termux-golang.sh
+RUN chmod +x ./build-termux-golang.sh
+RUN bash ./build-termux-golang.sh
