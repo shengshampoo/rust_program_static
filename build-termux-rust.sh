@@ -11,37 +11,22 @@ mkdir -p /work/artifact
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --profile minimal --default-toolchain stable -y
 source $HOME/.cargo/env && rustup target add aarch64-linux-android
 
-if [ "$(uname -m)" == "x86_64" ]; then
- curl -LO https://dl.google.com/android/repository/android-ndk-r29-linux.zip && unzip android-ndk-r29-linux.zip
+# https://github.com/HomuHomu833/android-ndk-custom
+curl -sL https://github.com/HomuHomu833/android-ndk-custom/releases/download/r29/android-ndk-r29-$(uname -m)-linux-musl.tar.xz | tar x --gzip
 
- mv /usr/bin/cc /usr/bin/cc.old
- ln -sf /android-ndk-r29/toolchains/llvm/prebuilt/linux-x86_64/bin/clang /usr/bin/cc
- export CC="/android-ndk-r29/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android23-clang"
- export PATH=/android-ndk-r29/toolchains/llvm/prebuilt/linux-x86_64/bin/:$PATH
- export ANDROID_NDK_HOME="/android-ndk-r29"
- export ANDROID_NDK="/android-ndk-r29"
- export ANDROID_NDK_ROOT="/android-ndk-r29"
-
-elif [ "$(uname -m)" == "aarch64" ]; then
- curl -sL https://github.com/SnowNF/ndk-aarch64-linux/releases/download/0.0.2/android-ndk-r29-linux-aarch64.tar.gz | tar x --gzip
-
- mv /usr/bin/cc /usr/bin/cc.old
- ln -sf /r29/toolchains/llvm/prebuilt/linux-x86_64/bin/clang /usr/bin/cc
- export CC="/r29/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android23-clang"
- export PATH=/r29/toolchains/llvm/prebuilt/linux-x86_64/bin/:$PATH
- export ANDROID_NDK_HOME="/r29"
- export ANDROID_NDK="/r29"
- export ANDROID_NDK_ROOT="/r29"
-
-else
-exit 1
-fi
+mv /usr/bin/cc /usr/bin/cc.old
+ln -sf /android-ndk-r29/toolchains/llvm/prebuilt/linux-$(uname -m)/bin/clang /usr/bin/cc
+export CC="/android-ndk-r29/toolchains/llvm/prebuilt/linux-$(uname -m)/bin/aarch64-linux-android23-clang"
+export PATH=/android-ndk-r29/toolchains/llvm/prebuilt/linux-$(uname -m)/bin/:$PATH
+export ANDROID_NDK_HOME="/android-ndk-r29"
+export ANDROID_NDK="/android-ndk-r29"
+export ANDROID_NDK_ROOT="/android-ndk-r29"
 
 # dufs
 cd $WORKSPACE
 git clone https://github.com/sigoden/dufs
 cd dufs
-RUSTFLAGS="-C target-feature=+crt-static -C linker=/android-ndk-r29/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android23-clang -C strip=symbols -C opt-level=s" cargo build --target aarch64-linux-android --release
+RUSTFLAGS="-C target-feature=+crt-static -C linker=/android-ndk-r29/toolchains/llvm/prebuilt/linux-$(uname -m)/bin/aarch64-linux-android23-clang -C strip=symbols -C opt-level=s" cargo build --target aarch64-linux-android --release
 cd ./target/aarch64-linux-android/release/
 tar vcJf ./dufs.tar.xz dufs
 mv ./dufs.tar.xz /work/artifact/
