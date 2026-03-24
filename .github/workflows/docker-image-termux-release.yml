@@ -35,7 +35,7 @@ jobs:
       uses: svenstaro/upload-release-action@v2
       with:
         file: ./dufs.tar.xz
-        asset_name: dufs-Android-ARM^4.tar.xz
+        asset_name: dufs-Android-ARM.tar.xz
         tag: refs/tags/continuous
         overwrite: true
         body: "Fully static rust binary using alpine linux docker containers."
