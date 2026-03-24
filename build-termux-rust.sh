@@ -16,9 +16,9 @@ curl -sL "https://github.com/HomuHomu833/android-ndk-custom/releases/download/r2
 
 mv /usr/bin/cc /usr/bin/cc.old
 ln -sf /android-ndk-r29/toolchains/llvm/prebuilt/linux-x86_64/bin/clang /usr/bin/cc
-export CC="/android-ndk-r29/toolchains/llvm/prebuilt/linux-linux-x86_64/bin/aarch64-linux-android23-clang"
-export CXX="/android-ndk-r29/toolchains/llvm/prebuilt/linux-linux-x86_64/bin/aarch64-linux-android23-clang++"
-export AR="/android-ndk-r29/toolchains/llvm/prebuilt/linux-linux-x86_64/bin/llvm-ar"
+export CC="/android-ndk-r29/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android23-clang"
+export CXX="/android-ndk-r29/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android23-clang++"
+export AR="/android-ndk-r29/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-ar"
 export AS=$CC
 export LD="/android-ndk-r29/toolchains/llvm/prebuilt/linux-x86_64/bin/ld"
 export RANLIB="/android-ndk-r29/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-ranlib"
