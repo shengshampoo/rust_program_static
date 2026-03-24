@@ -12,7 +12,7 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --profile m
 source $HOME/.cargo/env && rustup target add aarch64-linux-android
 
 # https://github.com/HomuHomu833/android-ndk-custom
-curl -sL https://github.com/HomuHomu833/android-ndk-custom/releases/download/r29/android-ndk-r29-$(uname -m)-linux-musl.tar.xz | tar x --xz
+curl -sL "https://github.com/HomuHomu833/android-ndk-custom/releases/download/r29/android-ndk-r29-$(uname -m)-linux-musl.tar.xz" | tar x --xz
 #curl -LO https://dl.google.com/android/repository/android-ndk-r29-linux.zip && unzip android-ndk-r29-linux.zip
 
 mv /usr/bin/cc /usr/bin/cc.old
