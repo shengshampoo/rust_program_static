@@ -11,7 +11,13 @@ mkdir -p /work/artifact
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --profile minimal --default-toolchain stable -y
 source $HOME/.cargo/env && rustup target add aarch64-linux-android
 
+if [ "$(uname -m)" == "x86_64" ]; then
 curl -LO https://dl.google.com/android/repository/android-ndk-r29-linux.zip && unzip android-ndk-r29-linux.zip
+elif [ "$(uname -m)" == "aarch64" ]; then
+curl -sL https://github.com/SnowNF/ndk-aarch64-linux/releases/download/0.0.2/android-ndk-r29-linux-aarch64.tar.gz | tar x --gzip
+else
+exit 1
+fi
 
 mv /usr/bin/cc /usr/bin/cc.old
 ln -sf /android-ndk-r29/toolchains/llvm/prebuilt/linux-x86_64/bin/clang /usr/bin/cc
