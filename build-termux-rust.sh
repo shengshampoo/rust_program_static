@@ -12,11 +12,17 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --profile m
 source $HOME/.cargo/env && rustup target add aarch64-linux-android
 
 # https://github.com/HomuHomu833/android-ndk-custom
-curl -sL https://github.com/HomuHomu833/android-ndk-custom/releases/download/r29/android-ndk-r29-$(uname -m)-linux-musl.tar.xz | tar xv --xz
+curl -sL https://github.com/HomuHomu833/android-ndk-custom/releases/download/r29/android-ndk-r29-$(uname -m)-linux-musl.tar.xz | tar x --xz
 
 mv /usr/bin/cc /usr/bin/cc.old
 ln -sf /android-ndk-r29/toolchains/llvm/prebuilt/linux-$(uname -m)/bin/clang /usr/bin/cc
 export CC="/android-ndk-r29/toolchains/llvm/prebuilt/linux-$(uname -m)/bin/aarch64-linux-android23-clang"
+export CXX=/android-ndk-r29/toolchains/llvm/prebuilt/linux-$(uname -m)/bin/aarch64-linux-android23-clang++"
+export AR=/android-ndk-r29/toolchains/llvm/prebuilt/linux-$(uname -m)/bin/llvm-ar
+export AS=$CC
+export LD=/android-ndk-r29/toolchains/llvm/prebuilt/linux-$(uname -m)/bin/ld
+export RANLIB=/android-ndk-r29/toolchains/llvm/prebuilt/linux-$(uname -m)/bin/llvm-ranlib
+export STRIP=/android-ndk-r29/toolchains/llvm/prebuilt/linux-$(uname -m)/bin/llvm-strip
 export PATH=/android-ndk-r29/toolchains/llvm/prebuilt/linux-$(uname -m)/bin/:$PATH
 export ANDROID_NDK_HOME="/android-ndk-r29"
 export ANDROID_NDK="/android-ndk-r29"
