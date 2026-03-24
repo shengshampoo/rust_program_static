@@ -17,12 +17,12 @@ curl -sL https://github.com/HomuHomu833/android-ndk-custom/releases/download/r29
 mv /usr/bin/cc /usr/bin/cc.old
 ln -sf /android-ndk-r29/toolchains/llvm/prebuilt/linux-$(uname -m)/bin/clang /usr/bin/cc
 export CC="/android-ndk-r29/toolchains/llvm/prebuilt/linux-$(uname -m)/bin/aarch64-linux-android23-clang"
-export CXX=/android-ndk-r29/toolchains/llvm/prebuilt/linux-$(uname -m)/bin/aarch64-linux-android23-clang++"
-export AR=/android-ndk-r29/toolchains/llvm/prebuilt/linux-$(uname -m)/bin/llvm-ar
+export CXX="/android-ndk-r29/toolchains/llvm/prebuilt/linux-$(uname -m)/bin/aarch64-linux-android23-clang++"
+export AR="/android-ndk-r29/toolchains/llvm/prebuilt/linux-$(uname -m)/bin/llvm-ar"
 export AS=$CC
-export LD=/android-ndk-r29/toolchains/llvm/prebuilt/linux-$(uname -m)/bin/ld
-export RANLIB=/android-ndk-r29/toolchains/llvm/prebuilt/linux-$(uname -m)/bin/llvm-ranlib
-export STRIP=/android-ndk-r29/toolchains/llvm/prebuilt/linux-$(uname -m)/bin/llvm-strip
+export LD="/android-ndk-r29/toolchains/llvm/prebuilt/linux-$(uname -m)/bin/ld"
+export RANLIB="/android-ndk-r29/toolchains/llvm/prebuilt/linux-$(uname -m)/bin/llvm-ranlib"
+export STRIP="/android-ndk-r29/toolchains/llvm/prebuilt/linux-$(uname -m)/bin/llvm-strip"
 export PATH=/android-ndk-r29/toolchains/llvm/prebuilt/linux-$(uname -m)/bin/:$PATH
 export ANDROID_NDK_HOME="/android-ndk-r29"
 export ANDROID_NDK="/android-ndk-r29"
