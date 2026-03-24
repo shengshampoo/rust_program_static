@@ -1,0 +1,41 @@
+name: Docker Image CI - Termux Android AARCH64 for Alpaquita Linux with rust to continuous tags
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  # run it manually
+  workflow_dispatch:    
+  schedule:
+    - cron: "16 0 * * *"  
+    - cron: "23 12 * * *" 
+
+jobs:
+
+  build:
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        dockeros: [alpaquita_termux]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build the Docker image
+      run: docker build -f Dockerfile-${{ matrix.dockeros }} --tag builderust .
+
+    - name: build static program with alpine/alpaquita linux docker with rust 
+      run: |
+        docker run --cidfile=builderust.cid builderust true
+        docker cp "$(cat builderust.cid):work/artifact/." .
+
+    - name: Upload binaries to release - dufs
+      uses: svenstaro/upload-release-action@v2
+      with:
+        file: ./dufs.tar.xz
+        asset_name: dufs-Android-ARM^4.tar.xz
+        tag: refs/tags/continuous
+        overwrite: true
+        body: "Fully static rust binary using alpine linux docker containers."
