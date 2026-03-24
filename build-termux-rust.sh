@@ -12,22 +12,30 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --profile m
 source $HOME/.cargo/env && rustup target add aarch64-linux-android
 
 if [ "$(uname -m)" == "x86_64" ]; then
-curl -LO https://dl.google.com/android/repository/android-ndk-r29-linux.zip && unzip android-ndk-r29-linux.zip
+ curl -LO https://dl.google.com/android/repository/android-ndk-r29-linux.zip && unzip android-ndk-r29-linux.zip
+
+ mv /usr/bin/cc /usr/bin/cc.old
+ ln -sf /android-ndk-r29/toolchains/llvm/prebuilt/linux-x86_64/bin/clang /usr/bin/cc
+ export CC="/android-ndk-r29/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android23-clang"
+ export PATH=/android-ndk-r29/toolchains/llvm/prebuilt/linux-x86_64/bin/:$PATH
+ export ANDROID_NDK_HOME="/android-ndk-r29"
+ export ANDROID_NDK="/android-ndk-r29"
+ export ANDROID_NDK_ROOT="/android-ndk-r29"
+
 elif [ "$(uname -m)" == "aarch64" ]; then
-curl -sL https://github.com/SnowNF/ndk-aarch64-linux/releases/download/0.0.2/android-ndk-r29-linux-aarch64.tar.gz | tar x --gzip
+ curl -sL https://github.com/SnowNF/ndk-aarch64-linux/releases/download/0.0.2/android-ndk-r29-linux-aarch64.tar.gz | tar x --gzip
+
+ mv /usr/bin/cc /usr/bin/cc.old
+ ln -sf /r29/toolchains/llvm/prebuilt/linux-x86_64/bin/clang /usr/bin/cc
+ export CC="/r29/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android23-clang"
+ export PATH=/r29/toolchains/llvm/prebuilt/linux-x86_64/bin/:$PATH
+ export ANDROID_NDK_HOME="/r29"
+ export ANDROID_NDK="/r29"
+ export ANDROID_NDK_ROOT="/r29"
+
 else
 exit 1
 fi
-
-mv /usr/bin/cc /usr/bin/cc.old
-ln -sf /android-ndk-r29/toolchains/llvm/prebuilt/linux-x86_64/bin/clang /usr/bin/cc
-
-export CC="/android-ndk-r29/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android23-clang"
-export PATH=/android-ndk-r29/toolchains/llvm/prebuilt/linux-x86_64/bin/:$PATH
-export ANDROID_NDK_HOME="/android-ndk-r29"
-export ANDROID_NDK="/android-ndk-r29"
-export ANDROID_NDK_ROOT="/android-ndk-r29"
-
 
 # dufs
 cd $WORKSPACE
